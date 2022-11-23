@@ -1,0 +1,5 @@
+
+.VBox{
+    height: 50vh; /* Would mean 50% of Viewport height */
+    width:  75vw; /* Would mean 75% of Viewport width*/
+}
