@@ -32,8 +32,6 @@ public class UpdateDonorController {
     private VBox stronaGlowna;
 
 
-
-
     @FXML
     private TextField numberOfCertificate;
     @FXML
@@ -42,7 +40,6 @@ public class UpdateDonorController {
     private TextArea studbookName;
     @FXML
     private TextArea donorBreedName;
-
 
 
     @FXML
@@ -106,35 +103,36 @@ public class UpdateDonorController {
 
     Stage stage;
     Donor donor;
-    Bufor bufor=new Bufor();;
+    Bufor bufor = new Bufor();
+    ;
 
 
-    public void setBufor(Bufor bufor){
-        this.bufor=bufor;
+    public void setBufor(Bufor bufor) {
+        this.bufor = bufor;
     }
-    public void setBuforDonor(Donor donor){
+
+    public void setBuforDonor(Donor donor) {
         this.bufor.prevDonor = donor;
     }
 
 
     public void goBack() throws IOException {
-        Functions.undoFunction(this,bufor,this.stage);
+        Functions.undoFunction(this, bufor, this.stage);
     }
 
     public void initialize() {
 
 
-
         numberOfCertificate.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    if (event.getCode().equals(KeyCode.ENTER)) {
-                        year.requestFocus();
-                    }
-                    if(numberOfCertificate.isFocused())
-                        numberOfCertificate.setStyle("-fx-background-color: white");
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    year.requestFocus();
                 }
-            });
+                if (numberOfCertificate.isFocused())
+                    numberOfCertificate.setStyle("-fx-background-color: white");
+            }
+        });
         year.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -175,7 +173,7 @@ public class UpdateDonorController {
                 }
             }
         });
-       name.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        name.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
@@ -203,7 +201,7 @@ public class UpdateDonorController {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                   growerAddress.requestFocus();
+                    growerAddress.requestFocus();
                 }
             }
         });
@@ -215,22 +213,22 @@ public class UpdateDonorController {
                 }
             }
         });
-       ownerName.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        ownerName.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                   ownerAddress.requestFocus();
+                    ownerAddress.requestFocus();
                 }
             }
         });
-       ownerAddress.setOnKeyPressed(new EventHandler<KeyEvent>() {
-           @Override
-           public void handle(KeyEvent event) {
-               if (event.getCode().equals(KeyCode.ENTER)) {
-                   method.requestFocus();
-               }
-           }
-       });
+        ownerAddress.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    method.requestFocus();
+                }
+            }
+        });
         method.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -315,7 +313,7 @@ public class UpdateDonorController {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                   grandmotherMotherNumber.requestFocus();
+                    grandmotherMotherNumber.requestFocus();
                 }
             }
         });
@@ -329,13 +327,14 @@ public class UpdateDonorController {
         });
 
     }
-    public void setStage(Stage stage){
-        this.stage=stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public void initData(Donor donor) {
-        String string= donor.getNumberOfCertificate();
-        numberOfCertificate.setText(string.substring(0,string.indexOf('/')));
+        String string = donor.getNumberOfCertificate();
+        numberOfCertificate.setText(string.substring(0, string.indexOf('/')));
         year.setText(string.substring(string.indexOf('/')));
         studbookName.setText(donor.getStudbookName());
         donorBreedName.setText(donor.getDonorBreedName());
@@ -366,101 +365,93 @@ public class UpdateDonorController {
     }
 
 
-
     public void saveNewDonor(ActionEvent actionEvent) {
 
-        Popup popup=new Popup();
+        Popup popup = new Popup();
         popup.getContent().add(new Label("Udało się"));
 
 
+        //  if(this.numberOfCertificate.getText().trim().isEmpty()){
+        //   this.numberOfCertificate.setStyle("-fx-background-color: green");
 
 
-      //  if(this.numberOfCertificate.getText().trim().isEmpty()){
-         //   this.numberOfCertificate.setStyle("-fx-background-color: green");
+        // String numberBookText= amount.getText();
 
-
-
-
-       // String numberBookText= amount.getText();
-
-       TextArea [] values= new TextArea[]{this.studbookName, this.donorBreedName,
-               this.tag, this.name, this.placeOfBirth, this.growerName, this.growerAddress,
-               this.ownerName, this.ownerAddress, this.method, this.fatherNumber,
-               this.fatherName, this.motherNumber, this.motherName, this.grandfatherFatherNumber,
-               this.grandfatherFatherName, this.grandmotherFatherNumber, this.grandmotherFatherName,
-               this.grandfatherMotherNumber, this.grandfatherMotherName,
-               this.grandmotherMotherNumber, this.grandmotherMotherName};
+        TextArea[] values = new TextArea[]{this.studbookName, this.donorBreedName,
+                this.tag, this.name, this.placeOfBirth, this.growerName, this.growerAddress,
+                this.ownerName, this.ownerAddress, this.method, this.fatherNumber,
+                this.fatherName, this.motherNumber, this.motherName, this.grandfatherFatherNumber,
+                this.grandfatherFatherName, this.grandmotherFatherNumber, this.grandmotherFatherName,
+                this.grandfatherMotherNumber, this.grandfatherMotherName,
+                this.grandmotherMotherNumber, this.grandmotherMotherName};
 
         boolean isEmpty = false;
 
-        if(this.numberOfCertificate.getText().trim().isEmpty()) {
+        if (this.numberOfCertificate.getText().trim().isEmpty()) {
             this.numberOfCertificate.setStyle("-fx-background-color: red");
-            isEmpty=true;
+            isEmpty = true;
         }
-        if(this.year.getText().trim().isEmpty()) {
+        if (this.year.getText().trim().isEmpty()) {
             this.year.setStyle("-fx-background-color: red");
-            isEmpty=true;
+            isEmpty = true;
         }
 
-        if(this.timeOfBirth.getValue()==null) {
+        if (this.timeOfBirth.getValue() == null) {
             this.timeOfBirth.setStyle("-fx-background-color: red");
-            isEmpty=true;
+            isEmpty = true;
         }
 
         for (TextArea value : values) {
-            if(value.getText().trim().isEmpty()) {
+            if (value.getText().trim().isEmpty()) {
                 value.setStyle("-fx-background-color: red");
                 isEmpty = true;
             }
         }
 
 
-        if(isEmpty){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
+        if (isEmpty) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Błąd");
             alert.setHeaderText("Nie wpisano wszystkich danych");
             alert.show();
-        }
-        else {
+        } else {
 
-            String numberOfCertificate= this.numberOfCertificate.getText().trim();
-            String year= this.numberOfCertificate.getText().trim();
+            String numberOfCertificate = this.numberOfCertificate.getText().trim();
+            String year = this.numberOfCertificate.getText().trim();
 
-            numberOfCertificate=new StringBuilder(numberOfCertificate).append("/").append(year).toString();
-            String studbookName=this.studbookName.getText();
-            String donorBreedName=this.donorBreedName.getText();
+            numberOfCertificate = new StringBuilder(numberOfCertificate).append("/").append(year).toString();
+            String studbookName = this.studbookName.getText();
+            String donorBreedName = this.donorBreedName.getText();
 
-            String tag=this.tag.getText().trim();
-            String name=this.name.getText();
+            String tag = this.tag.getText().trim();
+            String name = this.name.getText();
             LocalDate date2 = Functions.getDate(this.timeOfBirth);
-            String placeOfBirth=this.placeOfBirth.getText();
-            String growerName=this.growerName.getText();
-            String growerAddress=this.growerAddress.getText();
-            String ownerName=this.ownerName.getText();
-            String ownerAddress=this.ownerAddress.getText();
-            String method=this.method.getText();
+            String placeOfBirth = this.placeOfBirth.getText();
+            String growerName = this.growerName.getText();
+            String growerAddress = this.growerAddress.getText();
+            String ownerName = this.ownerName.getText();
+            String ownerAddress = this.ownerAddress.getText();
+            String method = this.method.getText();
 
-            String fatherNumber=this.fatherNumber.getText();
-            String fatherName=this.fatherName.getText();
-            String motherNumber=this.motherNumber.getText();
-            String motherName=this.motherName.getText();
-            String grandfatherFatherNumber=this.grandfatherFatherNumber.getText();
-            String grandfatherFatherName=this.grandfatherFatherName.getText();
-            String grandmotherFatherNumber=this.grandmotherFatherNumber.getText();
-            String grandmotherFatherName=this.grandmotherFatherName.getText();
-            String grandfatherMotherNumber=this.grandfatherMotherNumber.getText();
-            String grandfatherMotherName=this.grandfatherMotherName.getText();
-            String grandmotherMotherNumber=this.grandmotherMotherNumber.getText();
-            String grandmotherMotherName=this.grandmotherMotherName.getText();
-
-
+            String fatherNumber = this.fatherNumber.getText();
+            String fatherName = this.fatherName.getText();
+            String motherNumber = this.motherNumber.getText();
+            String motherName = this.motherName.getText();
+            String grandfatherFatherNumber = this.grandfatherFatherNumber.getText();
+            String grandfatherFatherName = this.grandfatherFatherName.getText();
+            String grandmotherFatherNumber = this.grandmotherFatherNumber.getText();
+            String grandmotherFatherName = this.grandmotherFatherName.getText();
+            String grandfatherMotherNumber = this.grandfatherMotherNumber.getText();
+            String grandfatherMotherName = this.grandfatherMotherName.getText();
+            String grandmotherMotherNumber = this.grandmotherMotherNumber.getText();
+            String grandmotherMotherName = this.grandmotherMotherName.getText();
 
 
-            Donor donor = new Donor(tag,numberOfCertificate.trim(), studbookName,
+            Donor donor = new Donor(tag, numberOfCertificate.trim(), studbookName,
                     donorBreedName, name,
                     growerName, growerAddress,
                     ownerName, ownerAddress,
-                    method, placeOfBirth, date2,fatherNumber, fatherName,
+                    method, placeOfBirth, date2, fatherNumber, fatherName,
                     motherNumber, motherName,
                     grandfatherFatherNumber, grandfatherFatherName,
                     grandmotherFatherNumber, grandmotherFatherName,
@@ -474,19 +465,19 @@ public class UpdateDonorController {
             //SemenService semenService=ctx.getBean(SemenService.class);
             //semenService.add(semenDto);
 
-            Functions.updateDonor(donor,this.donor.getId());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml1/donorInfoRemake.fxml"));
+            Functions.updateDonor(donor, this.donor.getId());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml1/donorInfo.fxml"));
             Parent root = null;
             try {
                 root = loader.load();
                 Stage stage = new Stage();
                 stage.setScene((new Scene(root)));
                 DonorInfoController donorInfoController = loader.<DonorInfoController>getController();
-                Bufor bufor=new Bufor(prevType.DONOR_LIST);
+                Bufor bufor = new Bufor(prevType.DONOR_LIST);
                 bufor.setPrevPrev(prevType.MENU);
                 donorInfoController.setBufor(bufor);
-              //  donorInfoController.setStage(stage);
-                donorInfoController.initData(donor,stage);
+                //  donorInfoController.setStage(stage);
+                donorInfoController.initData(donor, stage);
                 stage.setTitle("Dawca");
                 stage.show();
                 this.stage.close();
@@ -494,7 +485,7 @@ public class UpdateDonorController {
                 e.printStackTrace();
             }
         }
-       // popup.show(this.stage);
+        // popup.show(this.stage);
     }
 
 

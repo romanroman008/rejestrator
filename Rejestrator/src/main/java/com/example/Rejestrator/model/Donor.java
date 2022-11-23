@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 
 @Entity
-       // (name="donor")
+// (name="donor")
 public class Donor implements Serializable {
     private static final long serialVersionUID = -7533996434173519473L;
 
@@ -43,11 +43,12 @@ public class Donor implements Serializable {
     String grandmotherMotherNumber;
     String grandmotherMotherName;
     //@Column(name="number_book")
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.ALL})
-    @JoinColumn(name="donor_id")
-    private List<Semen> semenList= new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL})
+    @JoinColumn(name = "donor_id")
+    private List<Semen> semenList = new ArrayList<>();
 
-    public Donor(){}
+    public Donor() {
+    }
 
     public Donor(@Unique String tag, String numberOfCertificate, String studbookName, String donorBreedName, String name, String growerName, String growerAddress, String ownerName, String ownerAddress, String method, String placeOfBirth, LocalDate timeOfBirth, String motherNumber, String motherName, String fatherNumber, String fatherName, String grandfatherFatherNumber, String grandfatherFatherName, String grandmotherFatherNumber, String grandmotherFatherName, String grandfatherMotherNumber, String grandfatherMotherName, String grandmotherMotherNumber, String grandmotherMotherName) {
         this.tag = tag;
@@ -81,7 +82,7 @@ public class Donor implements Serializable {
         this.studbookName = studbookName;
         this.donorBreedName = donorBreedName;
         this.tag = tag;
-       }
+    }
 
 
     public Long getId() {
@@ -289,15 +290,17 @@ public class Donor implements Serializable {
     public void setGrandmotherMotherName(String grandmotherMotherName) {
         this.grandmotherMotherName = grandmotherMotherName;
     }
-    public void addSemen(Semen semen){
+
+    public void addSemen(Semen semen) {
         semenList.add(semen);
     }
-    public void deleteSemen(Semen semen){
 
-        Iterator<Semen> itr =semenList.iterator();
-        while (itr.hasNext()){
-            Semen x=itr.next();
-            if (x.equals(semen)){
+    public void deleteSemen(Semen semen) {
+
+        Iterator<Semen> itr = semenList.iterator();
+        while (itr.hasNext()) {
+            Semen x = itr.next();
+            if (x.equals(semen)) {
                 itr.remove();
                 return;
             }

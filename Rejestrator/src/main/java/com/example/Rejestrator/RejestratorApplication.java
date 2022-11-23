@@ -7,10 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RejestratorApplication {
 
-	public static void main(String[] args) {
-		Application.launch(ChartApplication.class,args);
-	}
-
+    public static void main(String[] args) {
+        Application.launch(ChartApplication.class, args);
+    }
 
 
 }

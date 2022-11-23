@@ -25,28 +25,29 @@ import java.io.IOException;
 @Controller
 public class DonorListController {
 
-    ObservableList list= FXCollections.observableArrayList();
+    ObservableList list = FXCollections.observableArrayList();
     Stage stage;
     @FXML
     Button returnButton;
     @FXML
-   private ListView <Donor> donorDtoListView;
-    Bufor bufor=new Bufor();
+    private ListView<Donor> donorDtoListView;
+    Bufor bufor = new Bufor();
 
 
-    public void setBufor(Bufor bufor){
-        this.bufor=bufor;
+    public void setBufor(Bufor bufor) {
+        this.bufor = bufor;
     }
-    public void setBuforDonor(Donor donor){
+
+    public void setBuforDonor(Donor donor) {
         this.bufor.prevDonor = donor;
     }
 
     public void goBack() throws IOException {
-        Functions.undoFunction(this,this.bufor,this.stage);
+        Functions.undoFunction(this, this.bufor, this.stage);
     }
 
-    public void setStage(Stage stage){
-        this.stage=stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public static class HBoxCell extends HBox {
@@ -67,7 +68,7 @@ public class DonorListController {
     }
 
 
-    private void crateButtonList(){
+    private void crateButtonList() {
         this.donorDtoListView.setCellFactory((Callback<ListView<Donor>, ListCell<Donor>>) param -> {
             return new ListCell<Donor>() {
                 @Override
@@ -83,28 +84,24 @@ public class DonorListController {
                         root.setPadding(new Insets(5, 10, 5, 10));
 
 
-
-
-
-
                         Region region = new Region();
                         HBox.setHgrow(region, Priority.ALWAYS);
                         root.getChildren().add(region);
 
 
-                        Label numberOfCertificate= new Label(donor.getNumberOfCertificate());
-                        Label studbookName=new Label(donor.getStudbookName());
-                        Label donorBreedName=new Label(donor.getDonorBreedName());
-                        Label tag=new Label(donor.getTag());
+                        Label numberOfCertificate = new Label(donor.getNumberOfCertificate());
+                        Label studbookName = new Label(donor.getStudbookName());
+                        Label donorBreedName = new Label(donor.getDonorBreedName());
+                        Label tag = new Label(donor.getTag());
                         numberOfCertificate.setMaxWidth(Double.MAX_VALUE);
                         studbookName.setMaxWidth(Double.MAX_VALUE);
                         donorBreedName.setMaxWidth(Double.MAX_VALUE);
                         tag.setMaxWidth(Double.MAX_VALUE);
-                        HBox.setHgrow(numberOfCertificate,Priority.ALWAYS);
-                        HBox.setHgrow(studbookName,Priority.ALWAYS);
-                        HBox.setHgrow(donorBreedName,Priority.ALWAYS);
-                        HBox.setHgrow(tag,Priority.ALWAYS);
-                        root.getChildren().addAll(numberOfCertificate,studbookName,donorBreedName,tag);
+                        HBox.setHgrow(numberOfCertificate, Priority.ALWAYS);
+                        HBox.setHgrow(studbookName, Priority.ALWAYS);
+                        HBox.setHgrow(donorBreedName, Priority.ALWAYS);
+                        HBox.setHgrow(tag, Priority.ALWAYS);
+                        root.getChildren().addAll(numberOfCertificate, studbookName, donorBreedName, tag);
 
 
                         Button btnShowDetails = new Button("Szczegóły");
@@ -132,7 +129,7 @@ public class DonorListController {
                             deleteDonor(donor);
                             System.out.println("Broke up with !");
                         });
-                        root.getChildren().addAll(btnShowDetails,btnAddFriend,btnRemove);
+                        root.getChildren().addAll(btnShowDetails, btnAddFriend, btnRemove);
 
                         // Finally, set our cell to display the root HBox
                         setText(null);
@@ -147,11 +144,11 @@ public class DonorListController {
 
     public void generateSelected(ActionEvent actionEvent) throws IOException {
 
-       // View.createSelectedPdf(donorDto,semenListToGenerate);
+        // View.createSelectedPdf(donorDto,semenListToGenerate);
     }
 
 
-    private void deleteDonor(com.example.Rejestrator.model.Donor donor){
+    private void deleteDonor(com.example.Rejestrator.model.Donor donor) {
         Functions.deleteDonor(donor);
         list.remove(donor);
         donorDtoListView.getItems().remove(donor);
@@ -159,10 +156,8 @@ public class DonorListController {
     }
 
 
-
-
     private void updateDonor(com.example.Rejestrator.model.Donor donor) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml123/updateDonor1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/updateDonor.fxml"));
         Parent root = loader.load();
         UpdateDonorController donorController = loader.getController();
         Stage stage = new Stage();
@@ -171,7 +166,7 @@ public class DonorListController {
         donorController.setStage(stage);
         Functions.findDonorByTag(donor.getTag());
         donorController.initData(donor);
-        Bufor bufor=new Bufor(prevType.DONOR_LIST);
+        Bufor bufor = new Bufor(prevType.DONOR_LIST);
         bufor.setPrevPrev(prevType.MENU);
         donorController.setBufor(bufor);
         stage.show();
@@ -180,15 +175,15 @@ public class DonorListController {
 
 
     private void showDetails(com.example.Rejestrator.model.Donor donor) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml123/donorInfoRemake.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/donorInfo.fxml"));
         Parent root = null;
         root = loader.load();
         Stage stage = new Stage();
         stage.setScene((new Scene(root)));
         DonorInfoController donorInfoController = loader.<DonorInfoController>getController();
-        donorInfoController.initData(donor,stage);
+        donorInfoController.initData(donor, stage);
         stage.setTitle("Informacje o dawcy");
-        Bufor bufor=(new Bufor(prevType.DONOR_LIST));
+        Bufor bufor = (new Bufor(prevType.DONOR_LIST));
         bufor.setPrevPrev(prevType.MENU);
         donorInfoController.setBufor(bufor);
         donorInfoController.setBuforDonor(donor);
@@ -198,7 +193,8 @@ public class DonorListController {
 
 
     public void initData() {
-        Functions.getAllDonors().stream().forEach(e->list.add(e));;
+        Functions.getAllDonors().stream().forEach(e -> list.add(e));
+        ;
         donorDtoListView.getItems().addAll(list);
         crateButtonList();
 

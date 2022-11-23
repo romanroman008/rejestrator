@@ -32,26 +32,28 @@ import java.util.List;
 public class SemenListController {
 
     public Button returnButton;
-    ObservableList list= FXCollections.observableArrayList();
-    List<Semen> semenListToGenerate=new ArrayList<>();
+    ObservableList list = FXCollections.observableArrayList();
+    List<Semen> semenListToGenerate = new ArrayList<>();
     private Donor donor;
     Stage stage;
     @FXML
-   private ListView <Semen> semenListView;
+    private ListView<Semen> semenListView;
 
-    Bufor bufor=new Bufor();;
+    Bufor bufor = new Bufor();
+    ;
 
 
-    public void setBufor(Bufor bufor){
-        this.bufor=bufor;
+    public void setBufor(Bufor bufor) {
+        this.bufor = bufor;
     }
-    public void setBuforDonor(Donor donor){
+
+    public void setBuforDonor(Donor donor) {
         this.bufor.prevDonor = donor;
     }
 
 
     public void goBack() throws IOException {
-        Functions.undoFunction(this,this.bufor,this.stage);
+        Functions.undoFunction(this, this.bufor, this.stage);
     }
 
 
@@ -71,7 +73,8 @@ public class SemenListController {
             this.getChildren().addAll(label, button);
         }
     }
-//    public void createContent(List<SemenDto> semenList,String tag) {
+
+    //    public void createContent(List<SemenDto> semenList,String tag) {
 //
 //
 //        List<HBoxCell> list = new ArrayList<>();
@@ -96,7 +99,7 @@ public class SemenListController {
 //        JButton b = new JButton(label);
 //        b.addActionListener(action);
 //    }
-    private void crateButtonList(String tag){
+    private void crateButtonList(String tag) {
         this.semenListView.setCellFactory((Callback<ListView<Semen>, ListCell<Semen>>) param -> {
             return new ListCell<Semen>() {
                 @Override
@@ -119,27 +122,26 @@ public class SemenListController {
                         root.getChildren().add(new Label(semen.getRecipientName()));
                         root.getChildren().add(new Label(semen.getRecipientAddress()));
 
-                        Label color=new Label(semen.getColor());
-                        Label colorB=new Label(semen.getColorB());
-                        Label amount=new Label(String.valueOf(semen.getAmount()));
-                        Label date=new Label(String.valueOf(semen.getDate()));
-                        Label recipientName=new Label(semen.getRecipientName());
-                        Label recipientAddress=new Label(semen.getRecipientAddress());
+                        Label color = new Label(semen.getColor());
+                        Label colorB = new Label(semen.getColorB());
+                        Label amount = new Label(String.valueOf(semen.getAmount()));
+                        Label date = new Label(String.valueOf(semen.getDate()));
+                        Label recipientName = new Label(semen.getRecipientName());
+                        Label recipientAddress = new Label(semen.getRecipientAddress());
                         color.setMaxWidth(Double.MAX_VALUE);
                         colorB.setMaxWidth(Double.MAX_VALUE);
                         amount.setMaxWidth(Double.MAX_VALUE);
                         date.setMaxWidth(Double.MAX_VALUE);
                         recipientName.setMaxWidth(Double.MAX_VALUE);
                         recipientAddress.setMaxWidth(Double.MAX_VALUE);
-                        HBox.setHgrow(color,Priority.ALWAYS);
-                        HBox.setHgrow(colorB,Priority.ALWAYS);
-                        HBox.setHgrow(amount,Priority.ALWAYS);
-                        HBox.setHgrow(date,Priority.ALWAYS);
-                        HBox.setHgrow(recipientName,Priority.ALWAYS);
-                        HBox.setHgrow(recipientAddress,Priority.ALWAYS);
+                        HBox.setHgrow(color, Priority.ALWAYS);
+                        HBox.setHgrow(colorB, Priority.ALWAYS);
+                        HBox.setHgrow(amount, Priority.ALWAYS);
+                        HBox.setHgrow(date, Priority.ALWAYS);
+                        HBox.setHgrow(recipientName, Priority.ALWAYS);
+                        HBox.setHgrow(recipientAddress, Priority.ALWAYS);
 
-                        root.getChildren().addAll(color,colorB,amount,date,recipientName,recipientAddress);
-
+                        root.getChildren().addAll(color, colorB, amount, date, recipientName, recipientAddress);
 
 
                         Region region = new Region();
@@ -147,9 +149,9 @@ public class SemenListController {
                         root.getChildren().add(region);
 
 
-                        CheckBox checkBox=new CheckBox("Zaznacz");
-                         checkBox.selectedProperty().addListener((observable -> {
-                            if(checkBox.isSelected())
+                        CheckBox checkBox = new CheckBox("Zaznacz");
+                        checkBox.selectedProperty().addListener((observable -> {
+                            if (checkBox.isSelected())
                                 semenListToGenerate.add(semen);
                             else
                                 semenListToGenerate.remove(semen);
@@ -167,10 +169,10 @@ public class SemenListController {
                         });
                         Button btnRemove = new Button("Usuń");
                         btnRemove.setOnAction(event -> {
-                           deleteSemen(semen);
+                            deleteSemen(semen);
                             System.out.println("Broke up with " + semen.getColor() + "!");
                         });
-                        root.getChildren().addAll(checkBox,btnAddFriend, btnRemove);
+                        root.getChildren().addAll(checkBox, btnAddFriend, btnRemove);
 
 
                         setText(null);
@@ -185,15 +187,13 @@ public class SemenListController {
 
     public void generateSelected(ActionEvent actionEvent) throws IOException {
 
-        View.createSelectedPdf(donor,semenListToGenerate);
+        View.createSelectedPdf(donor, semenListToGenerate);
         Alerts.pdfCreatedInfo();
     }
 
 
-
-
-    private void deleteSemen(Semen semen){
-        Functions.deleteSemen(this.donor.getTag(),semen);
+    private void deleteSemen(Semen semen) {
+        Functions.deleteSemen(this.donor.getTag(), semen);
         list.remove(semen);
         semenListView.getItems().remove(semen);
 
@@ -204,16 +204,16 @@ public class SemenListController {
 
 
     private void updateSemen(Semen semen) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/updateSemen.fxml"));
-        Parent root=loader.load();
-        Stage stage=new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/updateSemen.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
         stage.setScene((new Scene(root)));
-        UpdateSemenController updateSemenController=loader.<UpdateSemenController>getController();
-        updateSemenController.stage=stage;
-        updateSemenController.initData(this.donor,semen);
+        UpdateSemenController updateSemenController = loader.<UpdateSemenController>getController();
+        updateSemenController.stage = stage;
+        updateSemenController.initData(this.donor, semen);
         stage.setTitle("Stary dawca");
         stage.show();
-        Bufor bufor=new Bufor(prevType.SEMEN_LIST);
+        Bufor bufor = new Bufor(prevType.SEMEN_LIST);
         bufor.setDonorDto(this.donor);
         updateSemenController.setBufor(bufor);
         this.stage.close();
@@ -224,7 +224,7 @@ public class SemenListController {
     public void initData(Donor donor) {
 
         this.donor = donor;
-        donor.getSemenList().stream().forEach(e->list.add(e));
+        donor.getSemenList().stream().forEach(e -> list.add(e));
         semenListView.getItems().addAll(list);
         bufor.setDonorDto(donor);
         crateButtonList(donor.getTag());
@@ -233,9 +233,7 @@ public class SemenListController {
     }
 
 
-
-
-public void setStage(Stage stage){
-    this.stage=stage;
-}
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }

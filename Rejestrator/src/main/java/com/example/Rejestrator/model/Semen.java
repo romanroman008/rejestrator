@@ -12,11 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Semen implements Serializable,Comparable<Semen> {
+public class Semen implements Serializable, Comparable<Semen> {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String color;
     private String colorB;
@@ -27,7 +27,7 @@ public class Semen implements Serializable,Comparable<Semen> {
     private String recipientName;
     private String recipientAddress;
 
-    Semen(){};
+    Semen() {};
 
     public Semen(String color, String colorB, int amount, String placeOfDrawing, LocalDate date, String others, String recipientName, String recipientAddress) {
         this.color = color;
@@ -136,6 +136,7 @@ public class Semen implements Serializable,Comparable<Semen> {
             return colorCompare;
         return colorB.compareTo(s.colorB);
     }
+
     @Override
     public String toString() {
         return "Semen{" +

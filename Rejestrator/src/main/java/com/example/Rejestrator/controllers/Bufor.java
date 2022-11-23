@@ -9,7 +9,9 @@ public class Bufor {
     prevType prevPrev;
     Donor prevDonor;
 
-    public Bufor(){}
+    public Bufor() {
+    }
+
     public Bufor(prevType prev) {
         this.prev = prev;
     }

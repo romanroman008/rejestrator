@@ -93,30 +93,31 @@ public class DonorInfoController {
 
     Stage stage;
 
-    Bufor bufor=new Bufor();
+    Bufor bufor = new Bufor();
 
 
-    public void setBufor(Bufor bufor){
-        this.bufor=bufor;
+    public void setBufor(Bufor bufor) {
+        this.bufor = bufor;
     }
-    public void setBuforDonor(Donor donor){
+
+    public void setBuforDonor(Donor donor) {
         this.bufor.setDonorDto(donor);
     }
 
     public void goBack() throws IOException {
-        Functions.undoFunction(this,bufor,this.stage);
+        Functions.undoFunction(this, bufor, this.stage);
     }
 
 
     public void showAllSemen(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/semenList.fxml"));
-        Parent root=loader.load();
-        Stage stage=new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/semenList.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
         stage.setScene((new Scene(root)));
         stage.setTitle("Pobrania");
-        SemenListController semenListController=loader.getController();
+        SemenListController semenListController = loader.getController();
         semenListController.setStage(stage);
-        Bufor bufor=new Bufor(prevType.DONOR_INFO);
+        Bufor bufor = new Bufor(prevType.DONOR_INFO);
         bufor.setPrevPrev(this.bufor.getPrev());
         semenListController.setBufor(bufor);
         semenListController.initData(Functions.findDonorByTag(donor.getTag()));
@@ -152,19 +153,19 @@ public class DonorInfoController {
         grandfatherMotherName.setText(donor.getGrandfatherMotherName());
         grandmotherMotherNumber.setText(donor.getGrandfatherMotherNumber());
         grandmotherMotherName.setText(donor.getGrandmotherMotherName());
-        this.stage=stage;
+        this.stage = stage;
         setBuforDonor(donor);
 
     }
 
     public void addNewDrawing(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/newSemen.fxml"));
-        Parent root=loader.load();
-        Stage stage=new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newSemen.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
         stage.setScene((new Scene(root)));
-        NewSemenController newSemenController=loader.<NewSemenController>getController();
+        NewSemenController newSemenController = loader.<NewSemenController>getController();
         Donor donor = Functions.findDonorByTag(this.donor.getTag());
-        Bufor bufor=new Bufor(prevType.DONOR_INFO);
+        Bufor bufor = new Bufor(prevType.DONOR_INFO);
         bufor.setDonorDto(this.donor);
         newSemenController.setStage(stage);
         bufor.setPrevPrev(this.bufor.getPrev());
@@ -179,8 +180,8 @@ public class DonorInfoController {
         try {
             View.createPdf(Functions.findDonorByTag(this.donor.getTag().trim()));
             Alerts.pdfCreatedInfo();
-        }catch(FileNotFoundException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
+        } catch (FileNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Plik otwarty przez inny proces");
             alert.setHeaderText("Plik otwarty przez inny proces");
             alert.setContentText("Zamknij plik aby kontynuwaać");
@@ -195,15 +196,15 @@ public class DonorInfoController {
     }
 
     public void updateDonor(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml123/updateDonor1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/updateDonor.fxml"));
         Parent root = loader.load();
         UpdateDonorController donorController = loader.getController();
         Stage stage = new Stage();
         stage.setScene((new Scene(root)));
         stage.setTitle("Aktualizowanie dawcy");
         donorController.setStage(stage);
-        Donor donor =Functions.findDonorByTag(this.donor.getTag());
-        Bufor bufor=new Bufor(prevType.DONOR_INFO);
+        Donor donor = Functions.findDonorByTag(this.donor.getTag());
+        Bufor bufor = new Bufor(prevType.DONOR_INFO);
         bufor.setPrevPrev(this.bufor.getPrev());
         donorController.setBufor(bufor);
         donorController.initData(donor);
@@ -211,11 +212,10 @@ public class DonorInfoController {
         this.stage.close();
 
 
-
     }
 
 
-    public void setStage(Stage stage){
-        this.stage=stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

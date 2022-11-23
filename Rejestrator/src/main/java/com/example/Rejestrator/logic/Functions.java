@@ -20,12 +20,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Functions {
-    private static ConfigurableApplicationContext ctx= ChartApplication.getCtx();
-    private static DonorService donorService=ctx.getBean(DonorService.class);
+    private static ConfigurableApplicationContext ctx = ChartApplication.getCtx();
+    private static DonorService donorService = ctx.getBean(DonorService.class);
 
 
-    public static void addNewSemen(String tag,Semen semen){
-        Donor donor =findDonorByTag(tag);
+    public static void addNewSemen(String tag, Semen semen) {
+        Donor donor = findDonorByTag(tag);
         donor.addSemen(semen);
         Collections.sort(donor.getSemenList());
         donorService.updateSemenList(donor);
@@ -33,11 +33,12 @@ public class Functions {
     }
 
 
-    public static List<Donor> getAllDonors(){
+    public static List<Donor> getAllDonors() {
         return donorService.getAllDonors();
     }
-    public static void deleteSemen(String tag, Semen semen){
-        com.example.Rejestrator.model.Donor donor=findDonorByTag(tag);
+
+    public static void deleteSemen(String tag, Semen semen) {
+        com.example.Rejestrator.model.Donor donor = findDonorByTag(tag);
         donor.deleteSemen(semen);
         donorService.updateSemenList(donor);
         Alerts.semenDeletedInfo();
@@ -47,45 +48,44 @@ public class Functions {
 
         return donorService.findDonorByTag(tag);
     }
-    public static Donor findDonorById(Long id){
+
+    public static Donor findDonorById(Long id) {
         return donorService.findDonorById(id);
     }
 
 
-    public static void addNewDonor(com.example.Rejestrator.model.Donor donor){
-        if(!donorService.checkIfPresent(donor.getTag())) {
+    public static void addNewDonor(com.example.Rejestrator.model.Donor donor) {
+        if (!donorService.checkIfPresent(donor.getTag())) {
             donorService.saveDonor(donor);
-        }
-        else throw new IllegalArgumentException("Istnieje już dawca o podanym kolczyku");
+        } else throw new IllegalArgumentException("Istnieje już dawca o podanym kolczyku");
 
     }
 
-    public static void updateDonor(Donor donor, Long id){
-         donorService.updateDonor(donor,id);
+    public static void updateDonor(Donor donor, Long id) {
+        donorService.updateDonor(donor, id);
     }
 
 
-    public static void deleteDonor(Donor donor){
+    public static void deleteDonor(Donor donor) {
         donorService.deleteDonor(donor);
     }
 
 
-
-    public static LocalDate getDate(DatePicker date){
-        LocalDate toReturn=date.getValue();
+    public static LocalDate getDate(DatePicker date) {
+        LocalDate toReturn = date.getValue();
 
         return toReturn;
     }
 
 
     public static <T> void undoFunction(T that, Bufor bufor, Stage stage) throws IOException {
-        switch (bufor.getPrev()){
-            case MENU :
+        switch (bufor.getPrev()) {
+            case MENU:
 
-                FXMLLoader loader1= new FXMLLoader(that.getClass().getResource("/fxml/menu.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(that.getClass().getResource("/fxml/menu.fxml"));
                 Parent root1 = loader1.load();
-                MenuController menuController=loader1.getController();
-                Stage stage1=new Stage();
+                MenuController menuController = loader1.getController();
+                Stage stage1 = new Stage();
                 stage1.setTitle("Menu");
                 stage1.setScene((new Scene(root1)));
                 menuController.setStage(stage1);
@@ -93,32 +93,31 @@ public class Functions {
                 stage1.show();
                 break;
 
-            case DONOR_INFO :
-                FXMLLoader loader2= new FXMLLoader(that.getClass().getResource("/fxml123/donorInfoRemake.fxml"));
+            case DONOR_INFO:
+                FXMLLoader loader2 = new FXMLLoader(that.getClass().getResource("/fxml/donorInfo.fxml"));
                 Parent root2 = loader2.load();
-                DonorInfoController donorInfoController=loader2.getController();
-                Stage stage2=new Stage();
+                DonorInfoController donorInfoController = loader2.getController();
+                Stage stage2 = new Stage();
                 stage2.setTitle("Informacje o dawcy");
                 stage2.setScene((new Scene(root2)));
                 donorInfoController.setStage(stage2);
-                if(bufor.getPrevPrev()!=null) {
+                if (bufor.getPrevPrev() != null) {
                     bufor.setPrev(bufor.getPrevPrev());
                     bufor.setPrevPrev(prevType.MENU);
-                }
-                else {
+                } else {
                     bufor.setPrev(prevType.MENU);
                 }
                 donorInfoController.setBufor(bufor);
-                donorInfoController.initData(bufor.getDonorDto(),stage2);
+                donorInfoController.initData(bufor.getDonorDto(), stage2);
                 stage.close();
                 stage2.show();
                 break;
 
-            case DONOR_LIST :
-                FXMLLoader loader3= new FXMLLoader(that.getClass().getResource("/fxml/donorList.fxml"));
+            case DONOR_LIST:
+                FXMLLoader loader3 = new FXMLLoader(that.getClass().getResource("/fxml/donorList.fxml"));
                 Parent root3 = loader3.load();
-                DonorListController donorListController=loader3.getController();
-                Stage stage3=new Stage();
+                DonorListController donorListController = loader3.getController();
+                Stage stage3 = new Stage();
                 stage3.setTitle("Lista dawców");
                 stage3.setScene((new Scene(root3)));
                 donorListController.setStage(stage3);
@@ -131,10 +130,10 @@ public class Functions {
                 break;
 
             case SEMEN_LIST:
-                FXMLLoader loader4= new FXMLLoader(that.getClass().getResource("/fxml/semenList.fxml"));
+                FXMLLoader loader4 = new FXMLLoader(that.getClass().getResource("/fxml/semenList.fxml"));
                 Parent root4 = loader4.load();
-                SemenListController semenListController =loader4.getController();
-                Stage stage4=new Stage();
+                SemenListController semenListController = loader4.getController();
+                Stage stage4 = new Stage();
                 stage4.setTitle("Informacje o dawcy");
                 stage4.setScene((new Scene(root4)));
                 semenListController.setStage(stage4);

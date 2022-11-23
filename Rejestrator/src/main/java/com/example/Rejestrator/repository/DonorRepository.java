@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface DonorRepository extends JpaRepository<Donor,Long> {
+public interface DonorRepository extends JpaRepository<Donor, Long> {
     Optional<Donor> findDonorByTag(String tag);
 
-   boolean existsDonorByTag(String tag);
+    boolean existsDonorByTag(String tag);
 
     @Modifying
     @Query("UPDATE Donor d SET d.semenList= ?2 WHERE d.tag= ?1")

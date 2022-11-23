@@ -37,22 +37,20 @@ public class MenuController {
     Button addNewButton;
 
 
-
     Stage stage;
 
 
-
     public void addNewDonor(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml123/newDonor1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newDonorWithSemen.fxml"));
         Parent root = loader.load();
-        NewDonorController donorController = loader.getController();
+        NewDonorWithSemenController donorController = loader.getController();
         Stage stage = new Stage();
         stage.setScene((new Scene(root)));
         stage.setTitle("Nowy dawca");
         donorController.setStage(stage);
-        Bufor bufor=new Bufor(prevType.MENU);
+        Bufor bufor = new Bufor(prevType.MENU);
         donorController.setBufor(bufor);
-        this.stage= (Stage) v.getScene().getWindow();
+        this.stage = (Stage) v.getScene().getWindow();
         this.stage.close();
         stage.show();
 
@@ -67,10 +65,10 @@ public class MenuController {
         stage.setScene((new Scene(root)));
         stage.setTitle("Lista dawców");
         donorListController.setStage(stage);
-        Bufor bufor=new Bufor(prevType.MENU);
+        Bufor bufor = new Bufor(prevType.MENU);
         donorListController.setBufor(bufor);
         donorListController.initData();
-        this.stage= (Stage) v.getScene().getWindow();
+        this.stage = (Stage) v.getScene().getWindow();
         this.stage.close();
         stage.show();
 
@@ -81,22 +79,22 @@ public class MenuController {
             Alerts.donorNotFound();
         } else {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml123/donorInfoRemake.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/donorInfo.fxml"));
                 Parent root = null;
                 root = loader.load();
                 Stage stage = new Stage();
                 stage.setScene((new Scene(root)));
                 DonorInfoController donorInfoController = loader.<DonorInfoController>getController();
                 Donor donor = Functions.findDonorByTag(donorTagTextField.getText().trim());
-                donorInfoController.initData(donor,stage);
-                Bufor bufor=new Bufor(prevType.MENU);
+                donorInfoController.initData(donor, stage);
+                Bufor bufor = new Bufor(prevType.MENU);
                 donorInfoController.setBufor(bufor);
                 stage.setTitle("Informacje o dawcy");
-                this.stage= (Stage) v.getScene().getWindow();
+                this.stage = (Stage) v.getScene().getWindow();
                 this.stage.close();
                 stage.show();
             } catch (IOException | NullPointerException e) {
-               // alert.show();
+                // alert.show();
                 e.printStackTrace();
                 Alerts.donorNotFound();
             }
@@ -129,11 +127,11 @@ public class MenuController {
                 NewSemenController newSemenController = loader.<NewSemenController>getController();
                 Donor donor = Functions.findDonorByTag(donorTagTextField.getText());
                 newSemenController.initData(donor);
-                Bufor bufor=new Bufor(prevType.MENU);
+                Bufor bufor = new Bufor(prevType.MENU);
                 newSemenController.setBufor(bufor);
                 stage.setTitle("Nowe pobranie");
                 newSemenController.setStage(stage);
-                this.stage= (Stage) v.getScene().getWindow();
+                this.stage = (Stage) v.getScene().getWindow();
                 this.stage.close();
                 stage.show();
             } catch (IOException | NullPointerException e) {
@@ -143,20 +141,21 @@ public class MenuController {
     }
 
     public void addNewDonorWithout(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml123/newDonorWithout1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newDonor.fxml"));
         Parent root = loader.load();
-        NewDonorControllerWithout donorController = loader.getController();
+        NewDonorController donorController = loader.getController();
         Stage stage = new Stage();
         stage.setScene((new Scene(root)));
         stage.setTitle("Nowy dawca");
         donorController.setStage(stage);
-        Bufor bufor=new Bufor(prevType.MENU);
+        Bufor bufor = new Bufor(prevType.MENU);
         donorController.setBufor(bufor);
-        this.stage= (Stage) v.getScene().getWindow();
+        this.stage = (Stage) v.getScene().getWindow();
         this.stage.close();
         stage.show();
     }
-    public void setStage(Stage stage){
-        this.stage=stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

@@ -12,12 +12,12 @@ public class Alerts {
         donorSaved.show();
     }
 
-    public static void pdfCreatedInfo(){
-            Alert fileGenerated = new Alert(Alert.AlertType.INFORMATION);
+    public static void pdfCreatedInfo() {
+        Alert fileGenerated = new Alert(Alert.AlertType.INFORMATION);
         fileGenerated.setTitle("Wygenerowano plik PDF");
-        fileGenerated.setHeaderText("Wygenerowano plik PDF do folderu Rejestrator_pliki");
+        fileGenerated.setHeaderText("Wygenerowano plik PDF do folderu Rejestrator - Pliki PDF");
         fileGenerated.show();
-        }
+    }
 
     public static void donorUpdatedInfo(String tag) {
         Alert donorSaved = new Alert(Alert.AlertType.INFORMATION);
@@ -32,19 +32,20 @@ public class Alerts {
         alert.setHeaderText("Zapisano pobranie");
         alert.show();
     }
+
     public static void semenDeletedInfo() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Usunięto");
         alert.setHeaderText("Usunięto pobranie");
         alert.show();
     }
-    public static void donorDeletedInfo(String tag){
+
+    public static void donorDeletedInfo(String tag) {
         Alert donorSaved = new Alert(Alert.AlertType.INFORMATION);
         donorSaved.setTitle("Usunięto");
         donorSaved.setHeaderText("Usunięto dawce o kolczyku: " + tag);
         donorSaved.show();
     }
-
 
 
     //ERRORS
@@ -61,12 +62,14 @@ public class Alerts {
         alert.setHeaderText("Dawca o podanym kolczyku już istnieje");
         alert.show();
     }
-    public static void dataError(){
-        Alert alert=new Alert(Alert.AlertType.ERROR);
+
+    public static void dataError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Za mało danych");
         alert.setHeaderText("Uzupełnij pola");
         alert.show();
     }
+
     public static void invalidNumberError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Błąd");

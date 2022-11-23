@@ -17,24 +17,22 @@ import java.io.IOException;
 public class StageInitializer implements ApplicationListener<ChartApplication.StageReadyEvent> {
 
     @Value("classpath:/fxml/menu.fxml")
-        private Resource chartResource;
+    private Resource chartResource;
 
 
-
-
-        @Override
-        public void onApplicationEvent(ChartApplication.StageReadyEvent event) {
-            try {
-                FXMLLoader loader = new FXMLLoader(chartResource.getURL());
-                Parent parent=loader.load();
-                Stage stage = event.getStage();
-                stage.setScene(new Scene(parent));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
+    @Override
+    public void onApplicationEvent(ChartApplication.StageReadyEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(chartResource.getURL());
+            Parent parent = loader.load();
+            Stage stage = event.getStage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
     }
+}
 

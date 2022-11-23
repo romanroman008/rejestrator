@@ -1,36 +1,24 @@
 package com.example.Rejestrator.controllers;
 
-import com.example.Rejestrator.enums.prevType;
 import com.example.Rejestrator.info.Alerts;
 import com.example.Rejestrator.logic.Functions;
-import com.example.Rejestrator.model.*;
+import com.example.Rejestrator.model.Donor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-@Controller
 public class NewDonorController {
-    @FXML
     public Button returnButton;
-
     @FXML
     private Button guzior;
-
-
-
 
 
     @FXML
@@ -41,7 +29,6 @@ public class NewDonorController {
     private TextArea studbookName;
     @FXML
     private TextArea donorBreedName;
-
 
 
     @FXML
@@ -78,7 +65,6 @@ public class NewDonorController {
 //    private TextField placeOfBirth;
 
 
-
     @FXML
     private DatePicker timeOfBirth;
     @FXML
@@ -105,61 +91,45 @@ public class NewDonorController {
     private TextArea grandmotherMotherNumber;
     @FXML
     private TextArea grandmotherMotherName;
-    @FXML
-    private TextArea color;
-    @FXML
-    private TextArea colorB;
-    @FXML
-    private TextArea amount;
-    @FXML
-    private TextArea placeOfDrawing;
-    @FXML
-    private DatePicker date;
-    @FXML
-    private TextArea others;
-    @FXML
-    private TextArea recipientName;
-    @FXML
-    private TextArea recipientAddress;
 
     Stage stage;
-    Bufor bufor=new Bufor();;
+    Bufor bufor = new Bufor();
+    ;
 
 
-    public void setBufor(Bufor bufor){
-        this.bufor=bufor;
+    public void setBufor(Bufor bufor) {
+        this.bufor = bufor;
     }
-    public void setBuforDonor(Donor donor){
+
+    public void setBuforDonor(Donor donor) {
         this.bufor.prevDonor = donor;
     }
 
 
     public void goBack() throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/menu"));
-        Functions.undoFunction(loader,bufor,this.stage);
+        Functions.undoFunction(this, bufor, this.stage);
     }
 
     public void initialize() {
 
 
-
         numberOfCertificate.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    if (event.getCode().equals(KeyCode.ENTER)) {
-                        year.requestFocus();
-                    }
-                    if(numberOfCertificate.isFocused())
-                        numberOfCertificate.setStyle("-fx-background-color: white");
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    year.requestFocus();
                 }
-            });
+                if (numberOfCertificate.isFocused())
+                    numberOfCertificate.setStyle("-fx-background-color: white");
+            }
+        });
         year.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     studbookName.requestFocus();
                 }
-                if(year.isFocused())
+                if (year.isFocused())
                     year.setStyle("-fx-background-color: white");
             }
         });
@@ -169,7 +139,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     donorBreedName.requestFocus();
                 }
-                if(studbookName.isFocused())
+                if (studbookName.isFocused())
                     studbookName.setStyle("-fx-background-color: white");
             }
         });
@@ -179,7 +149,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     tag.requestFocus();
                 }
-                if(donorBreedName.isFocused())
+                if (donorBreedName.isFocused())
                     donorBreedName.setStyle("-fx-background-color: white");
             }
         });
@@ -197,17 +167,17 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     name.requestFocus();
                 }
-                if(tag.isFocused())
+                if (tag.isFocused())
                     tag.setStyle("-fx-background-color: white");
             }
         });
-       name.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        name.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     timeOfBirth.requestFocus();
                 }
-                if(name.isFocused())
+                if (name.isFocused())
                     name.setStyle("-fx-background-color: white");
             }
         });
@@ -217,7 +187,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     placeOfBirth.requestFocus();
                 }
-                if(timeOfBirth.isFocused())
+                if (timeOfBirth.isFocused())
                     timeOfBirth.setStyle("-fx-background-color: white");
             }
         });
@@ -227,7 +197,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     growerName.requestFocus();
                 }
-                if(placeOfBirth.isFocused())
+                if (placeOfBirth.isFocused())
                     placeOfBirth.setStyle("-fx-background-color: white");
             }
         });
@@ -235,9 +205,9 @@ public class NewDonorController {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                   growerAddress.requestFocus();
+                    growerAddress.requestFocus();
                 }
-                if(growerName.isFocused())
+                if (growerName.isFocused())
                     growerName.setStyle("-fx-background-color: white");
             }
         });
@@ -247,37 +217,37 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     ownerName.requestFocus();
                 }
-                if(growerAddress.isFocused())
+                if (growerAddress.isFocused())
                     growerAddress.setStyle("-fx-background-color: white");
             }
         });
-       ownerName.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        ownerName.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                   ownerAddress.requestFocus();
+                    ownerAddress.requestFocus();
                 }
-                if(ownerName.isFocused())
+                if (ownerName.isFocused())
                     ownerName.setStyle("-fx-background-color: white");
             }
         });
-       ownerAddress.setOnKeyPressed(new EventHandler<KeyEvent>() {
-           @Override
-           public void handle(KeyEvent event) {
-               if (event.getCode().equals(KeyCode.ENTER)) {
-                   method.requestFocus();
-               }
-               if(ownerAddress.isFocused())
-                   ownerAddress.setStyle("-fx-background-color: white");
-           }
-       });
+        ownerAddress.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    method.requestFocus();
+                }
+                if (ownerAddress.isFocused())
+                    ownerAddress.setStyle("-fx-background-color: white");
+            }
+        });
         method.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     fatherNumber.requestFocus();
                 }
-                if(method.isFocused())
+                if (method.isFocused())
                     method.setStyle("-fx-background-color: white");
             }
         });
@@ -286,7 +256,8 @@ public class NewDonorController {
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     fatherName.requestFocus();
-                } if(fatherNumber.isFocused())
+                }
+                if (fatherNumber.isFocused())
                     fatherNumber.setStyle("-fx-background-color: white");
             }
         });
@@ -295,7 +266,8 @@ public class NewDonorController {
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     motherNumber.requestFocus();
-                }if(fatherName.isFocused())
+                }
+                if (fatherName.isFocused())
                     fatherName.setStyle("-fx-background-color: white");
             }
         });
@@ -305,7 +277,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     motherName.requestFocus();
                 }
-                if(motherNumber.isFocused())
+                if (motherNumber.isFocused())
                     motherNumber.setStyle("-fx-background-color: white");
             }
         });
@@ -315,7 +287,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     grandfatherFatherNumber.requestFocus();
                 }
-                if(motherName.isFocused())
+                if (motherName.isFocused())
                     motherName.setStyle("-fx-background-color: white");
             }
         });
@@ -325,7 +297,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     grandfatherFatherName.requestFocus();
                 }
-                if(grandfatherFatherNumber.isFocused())
+                if (grandfatherFatherNumber.isFocused())
                     grandfatherFatherNumber.setStyle("-fx-background-color: white");
             }
         });
@@ -335,7 +307,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     grandmotherFatherNumber.requestFocus();
                 }
-                if(grandfatherFatherName.isFocused())
+                if (grandfatherFatherName.isFocused())
                     grandfatherFatherName.setStyle("-fx-background-color: white");
             }
         });
@@ -345,7 +317,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     grandmotherFatherName.requestFocus();
                 }
-                if(grandmotherFatherNumber.isFocused())
+                if (grandmotherFatherNumber.isFocused())
                     grandmotherFatherNumber.setStyle("-fx-background-color: white");
             }
         });
@@ -355,7 +327,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     grandfatherMotherNumber.requestFocus();
                 }
-                if(grandmotherFatherName.isFocused())
+                if (grandmotherFatherName.isFocused())
                     grandmotherFatherName.setStyle("-fx-background-color: white");
             }
         });
@@ -365,7 +337,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     grandfatherMotherName.requestFocus();
                 }
-                if(grandfatherMotherNumber.isFocused())
+                if (grandfatherMotherNumber.isFocused())
                     grandfatherMotherNumber.setStyle("-fx-background-color: white");
             }
         });
@@ -373,9 +345,9 @@ public class NewDonorController {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                   grandmotherMotherNumber.requestFocus();
+                    grandmotherMotherNumber.requestFocus();
                 }
-                if(grandfatherMotherName.isFocused())
+                if (grandfatherMotherName.isFocused())
                     grandfatherMotherName.setStyle("-fx-background-color: white");
             }
         });
@@ -385,7 +357,7 @@ public class NewDonorController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     grandmotherMotherName.requestFocus();
                 }
-                if(grandmotherMotherNumber.isFocused())
+                if (grandmotherMotherNumber.isFocused())
                     grandmotherMotherNumber.setStyle("-fx-background-color: white");
             }
         });
@@ -393,256 +365,134 @@ public class NewDonorController {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode().equals(KeyCode.ENTER)) {
-                    color.requestFocus();
+                    // grandmotherMotherName.requestFocus();
                 }
-                if( grandmotherMotherName.isFocused())
+                if (grandmotherMotherName.isFocused())
                     grandmotherMotherName.setStyle("-fx-background-color: white");
             }
         });
-        color.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    colorB.requestFocus();
-                }
-                if(fatherName.isFocused())
-                    fatherName.setStyle("-fx-background-color: white");
-            }
-        });
-        colorB.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    amount.requestFocus();
-                }
-                if(fatherName.isFocused())
-                    fatherName.setStyle("-fx-background-color: white");
-            }
-        });
-        amount.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    placeOfDrawing.requestFocus();
-                }
-                if(fatherName.isFocused())
-                    fatherName.setStyle("-fx-background-color: white");
-            }
-        });
-        placeOfDrawing.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    date.requestFocus();
-                }
-                if(fatherName.isFocused())
-                    fatherName.setStyle("-fx-background-color: white");
-            }
-        });
-        date.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    others.requestFocus();
-                }
-                if(fatherName.isFocused())
-                    fatherName.setStyle("-fx-background-color: white");
-            }
-        });
-        others.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    recipientName.requestFocus();
-                }
-                if(fatherName.isFocused())
-                    fatherName.setStyle("-fx-background-color: white");
-            }
-        });
-        recipientName.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode().equals(KeyCode.ENTER)) {
-                    recipientAddress.requestFocus();
-                }
-                if(fatherName.isFocused())
-                    fatherName.setStyle("-fx-background-color: white");
-            }
-        });
+
+
     }
 
-    public void setStage(Stage stage){
-        this.stage=stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public void saveNewDonor(ActionEvent actionEvent) {
 
-        Popup popup=new Popup();
+        Popup popup = new Popup();
         popup.getContent().add(new Label("Udało się"));
 
 
+        //  if(this.numberOfCertificate.getText().trim().isEmpty()){
+        //   this.numberOfCertificate.setStyle("-fx-background-color: green");
 
 
-      //  if(this.numberOfCertificate.getText().trim().isEmpty()){
-         //   this.numberOfCertificate.setStyle("-fx-background-color: green");
+        // String numberBookText= amount.getText();
 
-
-
-
-       // String numberBookText= amount.getText();
-
-       TextArea [] values= new TextArea[]{this.studbookName, this.donorBreedName,
-               this.tag, this.name, this.placeOfBirth, this.growerName, this.growerAddress,
-               this.ownerName, this.ownerAddress, this.method, this.fatherNumber,
-               this.fatherName, this.motherNumber, this.motherName, this.grandfatherFatherNumber,
-               this.grandfatherFatherName, this.grandmotherFatherNumber, this.grandmotherFatherName,
-               this.grandfatherMotherNumber, this.grandfatherMotherName,
-               this.grandmotherMotherNumber, this.grandmotherMotherName,this.color,this.colorB,this.amount,
-               this.placeOfDrawing,this.others,this.recipientName,this.recipientAddress};
+        TextArea[] values = new TextArea[]{this.studbookName, this.donorBreedName,
+                this.tag, this.name, this.placeOfBirth, this.growerName, this.growerAddress,
+                this.ownerName, this.ownerAddress, this.method, this.fatherNumber,
+                this.fatherName, this.motherNumber, this.motherName, this.grandfatherFatherNumber,
+                this.grandfatherFatherName, this.grandmotherFatherNumber, this.grandmotherFatherName,
+                this.grandfatherMotherNumber, this.grandfatherMotherName,
+                this.grandmotherMotherNumber, this.grandmotherMotherName};
 
         boolean isEmpty = false;
 
-        if(this.numberOfCertificate.getText().trim().isEmpty()) {
+        if (this.numberOfCertificate.getText().trim().isEmpty()) {
             this.numberOfCertificate.setStyle("-fx-background-color: red");
-            isEmpty=true;
+            isEmpty = true;
         }
-        if(this.year.getText().trim().isEmpty()) {
+        if (this.year.getText().trim().isEmpty()) {
             this.year.setStyle("-fx-background-color: red");
-            isEmpty=true;
+            isEmpty = true;
         }
-        if(this.date.getValue()==null) {
-            this.date.setStyle("-fx-background-color: red");
-            isEmpty=true;
-        }
-        if(this.timeOfBirth.getValue()==null) {
+
+        if (this.timeOfBirth.getValue() == null) {
             this.timeOfBirth.setStyle("-fx-background-color: red");
-            isEmpty=true;
+            isEmpty = true;
         }
 
 
         for (TextArea value : values) {
-            if(value.getText().trim().isEmpty()) {
+            if (value.getText().trim().isEmpty()) {
                 value.setStyle("-fx-background-color: red");
                 isEmpty = true;
             }
         }
 
-        try {
-                    Integer.parseInt(amount.getText().trim());
-        }catch(NumberFormatException e){
-            this.amount.setStyle("-fx-background-color: red");
-            Alerts.invalidNumberError();
-        }
 
-        if(isEmpty){
+        if (isEmpty) {
             Alerts.dataError();
-        }
-        else {
+        } else {
 
-            String numberOfCertificate= this.numberOfCertificate.getText().trim();
-            String year= this.numberOfCertificate.getText().trim();
+            String numberOfCertificate = this.numberOfCertificate.getText().trim();
+            String year = this.numberOfCertificate.getText().trim();
 
-            numberOfCertificate=new StringBuilder(numberOfCertificate).append("/").append(year).toString();
-            String studbookName=this.studbookName.getText();
-            String donorBreedName=this.donorBreedName.getText();
+            numberOfCertificate = new StringBuilder(numberOfCertificate).append("/").append(year).toString();
+            String studbookName = this.studbookName.getText();
+            String donorBreedName = this.donorBreedName.getText();
 
-            String tag=this.tag.getText().trim().trim();
-            String name=this.name.getText().trim();
+            String tag = this.tag.getText().trim().trim();
+            String name = this.name.getText().trim();
             LocalDate date2 = Functions.getDate(this.timeOfBirth);
-            String placeOfBirth=this.placeOfBirth.getText().trim();
-            String growerName=this.growerName.getText();
-            String growerAddress=this.growerAddress.getText();
-            String ownerName=this.ownerName.getText();
-            String ownerAddress=this.ownerAddress.getText();
-            String method=this.method.getText();
+            String placeOfBirth = this.placeOfBirth.getText().trim();
+            String growerName = this.growerName.getText();
+            String growerAddress = this.growerAddress.getText();
+            String ownerName = this.ownerName.getText();
+            String ownerAddress = this.ownerAddress.getText();
+            String method = this.method.getText();
 
-            String fatherNumber=this.fatherNumber.getText();
-            String fatherName=this.fatherName.getText();
-            String motherNumber=this.motherNumber.getText();
-            String motherName=this.motherName.getText();
-            String grandfatherFatherNumber=this.grandfatherFatherNumber.getText();
-            String grandfatherFatherName=this.grandfatherFatherName.getText();
-            String grandmotherFatherNumber=this.grandmotherFatherNumber.getText();
-            String grandmotherFatherName=this.grandmotherFatherName.getText();
-            String grandfatherMotherNumber=this.grandfatherMotherNumber.getText();
-            String grandfatherMotherName=this.grandfatherMotherName.getText();
-            String grandmotherMotherNumber=this.grandmotherMotherNumber.getText();
-            String grandmotherMotherName=this.grandmotherMotherName.getText();
-
-            String color=this.color.getText();
-            String colorB=this.colorB.getText();
-            String amount=this.amount.getText();
-            String placeOfDrawing=this.placeOfDrawing.getText();
-            LocalDate date = Functions.getDate(this.date);
-            String others=this.others.getText();
-            String recipientName=this.recipientName.getText();
-            String recipientAddress=this.recipientAddress.getText();
-
-            Semen semen= new Semen(color, colorB,
-                        Integer.parseInt(amount.trim()), placeOfDrawing, date,
-                        others, recipientName, recipientAddress);
+            String fatherNumber = this.fatherNumber.getText();
+            String fatherName = this.fatherName.getText();
+            String motherNumber = this.motherNumber.getText();
+            String motherName = this.motherName.getText();
+            String grandfatherFatherNumber = this.grandfatherFatherNumber.getText();
+            String grandfatherFatherName = this.grandfatherFatherName.getText();
+            String grandmotherFatherNumber = this.grandmotherFatherNumber.getText();
+            String grandmotherFatherName = this.grandmotherFatherName.getText();
+            String grandfatherMotherNumber = this.grandfatherMotherNumber.getText();
+            String grandfatherMotherName = this.grandfatherMotherName.getText();
+            String grandmotherMotherNumber = this.grandmotherMotherNumber.getText();
+            String grandmotherMotherName = this.grandmotherMotherName.getText();
 
 
-
-
-
-            com.example.Rejestrator.model.Donor donor = new com.example.Rejestrator.model.Donor(tag,numberOfCertificate.trim(), studbookName,
+            com.example.Rejestrator.model.Donor donor = new com.example.Rejestrator.model.Donor(tag, numberOfCertificate.trim(), studbookName,
                     donorBreedName, name,
                     growerName, growerAddress,
                     ownerName, ownerAddress,
-                    method, placeOfBirth, date2,fatherNumber, fatherName,
+                    method, placeOfBirth, date2, fatherNumber, fatherName,
                     motherNumber, motherName,
                     grandfatherFatherNumber, grandfatherFatherName,
                     grandmotherFatherNumber, grandmotherFatherName,
                     grandfatherMotherNumber, grandfatherMotherName,
                     grandmotherMotherNumber, grandmotherMotherName);
 
-            // DonorDao dao=ctx.getBean(DonorDao.class);
-            // SemenDao semenDao=ctx.getBean(SemenDao.class);
 
-            donor.addSemen(semen);
-            // dao.save(donor);
-            // semenDao.save(semen);
-            //SemenService semenService=ctx.getBean(SemenService.class);
-            //semenService.add(semenDto);
             try {
                 Functions.addNewDonor(donor);
-               // this.stage.close();
-            }catch(IllegalArgumentException e){
+                //ggthis.stage.close();
+            } catch (IllegalArgumentException e) {
                 Alerts.donorAlreadyExist();
             }
+
+
             clearIt();
-               // Alert alert = new Alert(Alert.AlertType.INFORMATION);
-               // alert.setTitle(e.getMessage());
-            }
-
         }
-       // popup.show(this.stage);
 
-    private void showDetails(Donor donor) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/donorInfo.fxml"));
-        Parent root = null;
-        root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene((new Scene(root)));
-        DonorInfoController donorInfoController = loader.<DonorInfoController>getController();
-        donorInfoController.initData(donor,stage);
-        stage.setTitle("Stary dawca");
-        Bufor bufor=(new Bufor(prevType.DONOR_LIST));
-        bufor.setPrevPrev(prevType.MENU);
-        donorInfoController.setBufor(bufor);
-        donorInfoController.setBuforDonor(donor);
-        stage.show();
     }
 
-    private void clearIt(){
+
+    private void clearIt() {
         numberOfCertificate.clear();
         year.clear();
         studbookName.clear();
         donorBreedName.clear();
         tag.clear();
         name.clear();
-        timeOfBirth.setValue(LocalDate.of(2022,4,1));
+        timeOfBirth.setValue(LocalDate.of(2022, 4, 1));
         placeOfBirth.clear();
         growerName.clear();
         growerAddress.clear();
@@ -661,12 +511,7 @@ public class NewDonorController {
         grandfatherMotherName.clear();
         grandmotherMotherNumber.clear();
         grandmotherMotherName.clear();
-        color.clear();
-        colorB.clear();
-        amount.clear();
-        placeOfDrawing.clear();
-        date.setValue(LocalDate.of(2022,4,1));
     }
-    }
+}
 
 

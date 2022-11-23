@@ -47,29 +47,30 @@ public class UpdateSemenController {
     @FXML
     private ListView<Semen> list;
 
-    ObservableList listO= FXCollections.observableArrayList();
+    ObservableList listO = FXCollections.observableArrayList();
 
     private Donor donor;
     private Semen semen;
     Stage stage;
-    Bufor bufor=new Bufor();
+    Bufor bufor = new Bufor();
 
 
-    public void setBufor(Bufor bufor){
-        this.bufor=bufor;
+    public void setBufor(Bufor bufor) {
+        this.bufor = bufor;
     }
-    public void setBuforDonor(Donor donor){
+
+    public void setBuforDonor(Donor donor) {
         this.bufor.prevDonor = donor;
     }
 
     public void goBack() throws IOException {
-        Functions.undoFunction(this,this.bufor,this.stage);
+        Functions.undoFunction(this, this.bufor, this.stage);
     }
 
     public void initData(Donor donor, Semen semen) {
 
         this.donor = donor;
-        this.semen =semen;
+        this.semen = semen;
         this.bufor.setDonorDto(donor);
         loadData();
 
@@ -79,7 +80,7 @@ public class UpdateSemenController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     colorB.requestFocus();
                 }
-                if(color.isFocused())
+                if (color.isFocused())
                     color.setStyle("-fx-background-color: white");
             }
         });
@@ -89,7 +90,7 @@ public class UpdateSemenController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     amount.requestFocus();
                 }
-                if(colorB.isFocused())
+                if (colorB.isFocused())
                     colorB.setStyle("-fx-background-color: white");
             }
         });
@@ -99,7 +100,7 @@ public class UpdateSemenController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     placeOfDrawing.requestFocus();
                 }
-                if(amount.isFocused())
+                if (amount.isFocused())
                     amount.setStyle("-fx-background-color: white");
             }
         });
@@ -109,7 +110,7 @@ public class UpdateSemenController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     date.requestFocus();
                 }
-                if(placeOfDrawing.isFocused())
+                if (placeOfDrawing.isFocused())
                     placeOfDrawing.setStyle("-fx-background-color: white");
             }
         });
@@ -119,7 +120,7 @@ public class UpdateSemenController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     others.requestFocus();
                 }
-                if(date.isFocused())
+                if (date.isFocused())
                     date.setStyle("-fx-background-color: white");
             }
         });
@@ -129,7 +130,7 @@ public class UpdateSemenController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     recipientName.requestFocus();
                 }
-                if(others.isFocused())
+                if (others.isFocused())
                     others.setStyle("-fx-background-color: white");
             }
         });
@@ -139,7 +140,7 @@ public class UpdateSemenController {
                 if (event.getCode().equals(KeyCode.ENTER)) {
                     recipientAddress.requestFocus();
                 }
-                if(recipientName.isFocused())
+                if (recipientName.isFocused())
                     recipientName.setStyle("-fx-background-color: white");
             }
         });
@@ -147,7 +148,7 @@ public class UpdateSemenController {
             @Override
             public void handle(KeyEvent event) {
 
-                if( recipientAddress.isFocused())
+                if (recipientAddress.isFocused())
                     recipientAddress.setStyle("-fx-background-color: white");
             }
         });
@@ -163,12 +164,11 @@ public class UpdateSemenController {
         this.recipientAddress.setText(semen.getRecipientAddress());
 
 
-
     }
-    private void loadData()
-    {
+
+    private void loadData() {
         //this.donorDto= Functions.findDonorInMap(this.donorDto.getNumberBook());
-        donor.getSemenList().stream().forEach(e->listO.add(e));
+        donor.getSemenList().stream().forEach(e -> listO.add(e));
         list.getItems().addAll(listO);
     }
 
@@ -184,18 +184,18 @@ public class UpdateSemenController {
 //        SemenDto semenDto=new SemenDto(colorText,colorBText,amountText,placeOfDrawingText,date,othersText,recipientNameText,recipientAddressText);
 
 
-        TextArea [] values= new TextArea[]{this.color,this.colorB,this.amount,
-                this.placeOfDrawing,this.others,this.recipientName,this.recipientAddress};
+        TextArea[] values = new TextArea[]{this.color, this.colorB, this.amount,
+                this.placeOfDrawing, this.others, this.recipientName, this.recipientAddress};
 
 
         boolean isEmpty = false;
 
-        if(this.date.getValue()==null) {
+        if (this.date.getValue() == null) {
             this.date.setStyle("-fx-background-color: red");
-            isEmpty=true;
+            isEmpty = true;
         }
         for (TextArea value : values) {
-            if(value.getText().trim().isEmpty()) {
+            if (value.getText().trim().isEmpty()) {
                 value.setStyle("-fx-background-color: red");   // /optymmailziacja
                 isEmpty = true;
             }
@@ -203,23 +203,22 @@ public class UpdateSemenController {
 
         try {
             Integer.parseInt(amount.getText().trim());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.amount.setStyle("-fx-background-color: red");
             Alerts.invalidNumberError();
         }
 
-        if(isEmpty){
+        if (isEmpty) {
             Alerts.dataError();
-        }
-        else {
-            String color=this.color.getText();
-            String colorB=this.colorB.getText();
-            String amount=this.amount.getText();
-            String placeOfDrawing=this.placeOfDrawing.getText();
+        } else {
+            String color = this.color.getText();
+            String colorB = this.colorB.getText();
+            String amount = this.amount.getText();
+            String placeOfDrawing = this.placeOfDrawing.getText();
             LocalDate date = Functions.getDate(this.date);
-            String others=this.others.getText();
-            String recipientName=this.recipientName.getText();
-            String recipientAddress=this.recipientAddress.getText();
+            String others = this.others.getText();
+            String recipientName = this.recipientName.getText();
+            String recipientAddress = this.recipientAddress.getText();
 
             Semen semen = new Semen(color, colorB,
                     Integer.parseInt(amount.trim()), placeOfDrawing, date,
@@ -228,36 +227,35 @@ public class UpdateSemenController {
             list.getItems().remove(this.semen);
             listO.add(semen);
             list.getItems().add(semen);
-            Functions.deleteSemen(this.donor.getTag(),this.semen);
-            Functions.addNewSemen(this.donor.getTag(),semen);
-            this.semen=semen;
+            Functions.deleteSemen(this.donor.getTag(), this.semen);
+            Functions.addNewSemen(this.donor.getTag(), semen);
+            this.semen = semen;
 
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/semenList.fxml"));
-            Parent root= null;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/semenList.fxml"));
+            Parent root = null;
             try {
                 root = loader.load();
 
-            Stage stage=new Stage();
-            stage.setScene((new Scene(root)));
-            stage.setTitle("NEAD");
-            SemenListController semenListController=loader.getController();
-            semenListController.setBufor(new Bufor(prevType.DONOR_INFO));
-            semenListController.initData(Functions.findDonorByTag(donor.getTag()));
-            semenListController.setStage(stage);
-            stage.show();
-            this.stage.close();
+                Stage stage = new Stage();
+                stage.setScene((new Scene(root)));
+                stage.setTitle("NEAD");
+                SemenListController semenListController = loader.getController();
+                semenListController.setBufor(new Bufor(prevType.DONOR_INFO));
+                semenListController.initData(Functions.findDonorByTag(donor.getTag()));
+                semenListController.setStage(stage);
+                stage.show();
+                this.stage.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
 
-
         // loadData();
     }
 
-    public void setStage(Stage stage){
-        this.stage=stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
